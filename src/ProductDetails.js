@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   NavLink,
   Switch,
@@ -10,12 +10,15 @@ import useFetch from "./useFetch.js";
 import ProductDetailInfo from "./ProductDetailInfo.js";
 import ProductDetailNutrition from "./ProductDetailNutrition.js";
 import ProductDetailStorage from "./ProductDetailStorage.js";
+import { AppContext } from "./AppContext.js";
 
 export default function ProductDetails() {
   const [product, setProduct] = useState({});
   const { get } = useFetch("https://react-tutorial-demo.firebaseio.com/");
   const params = useParams();
   const match = useRouteMatch();
+  const { getProductQuantityFromCart } = useContext(AppContext);
+  const quantity = getProductQuantityFromCart(product.id);
 
   useEffect(() => {
     get(`productinfo/id${params.id}.json`)
@@ -26,17 +29,26 @@ export default function ProductDetails() {
   }, [get, params.id]);
 
   return (
-    <div className="product-details-layout">
-      <div>
-        <h2>{product.name}</h2>
+    <div className="product">
+      <div className="product-image-container">
         <img
           src={product.image}
-          width="125"
-          height="125"
-          className="product-details-image"
+          width="100"
+          height="100"
+          className="product-image"
           alt={product.name}
         />
+        {quantity > 0 && (
+          <div className="product-quantity-container">
+            <div className="product-quantity">{quantity}</div>
+          </div>
+        )}
       </div>
+      <div className="product-info">
+        <h3>{product.name}</h3>
+        <p>{product.description}</p>
+      </div>
+
       <div>
         <div className="tabs">
           <ul>

@@ -3,8 +3,13 @@ import Button from "./Button.js";
 import { AppContext } from "./AppContext.js";
 
 export default function ProductDetailInfo({ product }) {
-  const { onProductAdd } = useContext(AppContext);
+  const {
+    onProductAdd,
+    onProductDelete,
+    getProductQuantityFromCart,
+  } = useContext(AppContext);
 
+  const quantity = getProductQuantityFromCart(product.id);
   return (
     <>
       <p>
@@ -12,6 +17,15 @@ export default function ProductDetailInfo({ product }) {
         piece.
       </p>
       <Button onClick={() => onProductAdd(product)}>${product.price}</Button>
+      {quantity > 0 && (
+        <Button
+          outline
+          onClick={() => onProductDelete(product.id)}
+          className="product-delete"
+        >
+          x
+        </Button>
+      )}
     </>
   );
 }

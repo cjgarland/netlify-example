@@ -19,7 +19,6 @@ export default function Cart() {
     const lineItems = cart.map((product) => {
       return { price: product.price_id, quantity: product.quantity };
     });
-    console.log("Attempting to go to stripe");
 
     stripeLoadedPromise.then((stripe) => {
       stripe
@@ -46,7 +45,7 @@ export default function Cart() {
       <div>
         <h1>Your Cart</h1>
         {cart.length === 0 && (
-          <p>You have not added any product to your cart yet.</p>
+          <p>You have not added any products to your cart yet.</p>
         )}
         {cart.length > 0 && (
           <>

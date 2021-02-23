@@ -62,13 +62,19 @@ function AppProvider(props) {
     );
   const getProductFromCart = (id) => cart.find((product) => product.id === id);
 
+  function getProductQuantityFromCart(id) {
+    const productFromCart = cart.find((product) => product.id === id);
+    return productFromCart ? productFromCart.quantity : 0;
+  }
+
   const cartData = {
-    cart: cart,
+    cart,
     onProductAdd: handleProductAdd,
     onProductDelete: handleProductDelete,
     getCartCount,
     getTotalPrice,
     getProductFromCart,
+    getProductQuantityFromCart,
   };
 
   return (

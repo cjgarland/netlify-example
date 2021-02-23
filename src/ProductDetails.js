@@ -23,7 +23,7 @@ export default function ProductDetails(props) {
         setProduct(data);
       })
       .catch((error) => console.log("Could not load product details", error));
-  }, []);
+  }, [get, params.id]);
 
   return (
     <div className="product-details-layout">

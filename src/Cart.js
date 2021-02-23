@@ -4,7 +4,7 @@ import Input from "./Input.js";
 import Button from "./Button.js";
 
 const stripeLoadedPromise = loadStripe(
-  "pk_test_51IMEZhCguMenmoeITKb6qZHXD7SWCXyDaz25hfioAK7lWtZZ0pHcQJqqPp7hAKQ8N7iQEsZeF645bgRP4FMjyfjh003Pb6YA9M"
+  "pk_test_51HsqkCGuhXEITAut89vmc4jtjYd7XPs8hWfo2XPef15MFqI8rCFc8NqQU9WutlUBsd8kmNqHBeEmSrdMMpeEEyfT00KzeVdate"
 );
 
 export default function Cart({ cart }) {
@@ -21,14 +21,15 @@ export default function Cart({ cart }) {
     const lineItems = cart.map((product) => {
       return { price: product.price_id, quantity: product.quantity };
     });
+    console.log("Attempting to go to stripe");
 
     stripeLoadedPromise.then((stripe) => {
       stripe
         .redirectToCheckout({
           lineItems: lineItems,
           mode: "payment",
-          successUrl: "https://superm.react-tutorial.app/",
-          cancelUrl: "https://superm.react-tutorial.app/",
+          successUrl: "https://quizzical-kepler-eaf9d1.netlify.app/",
+          cancelUrl: "https://quizzical-kepler-eaf9d1.netlify.app/",
           customerEmail: email,
         })
         .then((response) => {

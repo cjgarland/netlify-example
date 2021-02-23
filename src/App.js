@@ -9,7 +9,6 @@ import Cart from "./Cart.js";
 
 function App() {
   const [cart, setCart] = useState(function () {
-    const savedString = localStorage.getItem("cart");
     let savedCart = [];
     try {
       savedCart = JSON.parse(localStorage.getItem("cart")) || [];

@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import Button from "./Button.js";
+import { AppContext } from "./AppContext.js";
 
-export default function ProductDetailInfo({ product, onProductAdd }) {
+export default function ProductDetailInfo({ product }) {
+  const { onProductAdd } = useContext(AppContext);
+
   return (
     <>
       <p>

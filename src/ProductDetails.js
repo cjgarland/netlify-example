@@ -11,7 +11,7 @@ import ProductDetailInfo from "./ProductDetailInfo.js";
 import ProductDetailNutrition from "./ProductDetailNutrition.js";
 import ProductDetailStorage from "./ProductDetailStorage.js";
 
-export default function ProductDetails(props) {
+export default function ProductDetails() {
   const [product, setProduct] = useState({});
   const { get } = useFetch("https://react-tutorial-demo.firebaseio.com/");
   const params = useParams();
@@ -67,10 +67,7 @@ export default function ProductDetails(props) {
         </div>
         <Switch>
           <Route exact path={match.path}>
-            <ProductDetailInfo
-              onProductAdd={props.onProductAdd}
-              product={product}
-            />
+            <ProductDetailInfo product={product} />
           </Route>
 
           <Route path={match.path + "/nutrition"}>

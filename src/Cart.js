@@ -1,17 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { loadStripe } from "@stripe/stripe-js";
 import Input from "./Input.js";
 import Button from "./Button.js";
+import { AppContext } from "./AppContext.js";
 
 const stripeLoadedPromise = loadStripe(
   "pk_test_51HsqkCGuhXEITAut89vmc4jtjYd7XPs8hWfo2XPef15MFqI8rCFc8NqQU9WutlUBsd8kmNqHBeEmSrdMMpeEEyfT00KzeVdate"
 );
 
-export default function Cart({ cart }) {
-  const totalPrice = cart.reduce(
-    (total, product) => total + product.price * product.quantity,
-    0
-  );
+export default function Cart() {
+  const { cart, getTotalPrice } = useContext(AppContext);
 
   const [email, setEmail] = useState("");
 
@@ -89,7 +87,7 @@ export default function Cart({ cart }) {
                 <tr>
                   <th colSpan="2"></th>
                   <th className="cart-highlight">Total</th>
-                  <th className="cart-highlight">${totalPrice}</th>
+                  <th className="cart-highlight">${getTotalPrice()}</th>
                 </tr>
               </tfoot>
             </table>
